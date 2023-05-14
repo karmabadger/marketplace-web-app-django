@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Reset Password</h1>
+<p>user: {{ user }}</p>
+<p>Enter your new password:</p>
+<form action='/accounts/resetconfirmed/' method='POST'>
+  <input type="hidden" value="{{ user }}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="submit">
+</form>
+
+
+{% endblock content %}

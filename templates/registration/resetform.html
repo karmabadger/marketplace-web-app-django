@@ -1,0 +1,14 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<h1>Reset Password</h1>
+<form action="/accounts/reset_request/" method="POST">
+  {% csrf_token %}
+  <p>
+    <label>Email:</label>
+    <input type="email" name="email" maxlength="200" />
+    <!-- <span class="helptext">Required</span> -->
+  </p>
+  <input type="submit" value="submit" />
+</form>
+{% endblock content %}

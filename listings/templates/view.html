@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>{{ listing.title_text }}</h1>
+<h3>Posted by {{ listing.owner_user }}</h3>
+
+{% if request.user == listing.owner_user %}
+<div class='listing-controls' align='right'>
+<a href='{% url 'edit' listing.id%}'>Edit</a>
+<a href='{% url 'deletelisting' listing.id%}'>Delete</a>
+</div>
+{% endif %}
+
+{% if listing.image %}
+<img src="../../{{ listing.image.url }}" height="420" />
+{% endif %}
+<p class="item-price">{{ listing.money_price }}$</p>
+<p class="item-inventory">{{ listing.int_inventory}} left in stock</p>
+<p>{{ listing.desc_text }}</p>
+
+{% if request.user.is_authenticated %}
+<a href="/chat/{{ listing.owner_user }}">Click here to chat with the seller of the product</a><br><br>
+<button onclick="window.location.href='/listings/add_to_cart{{ request.path }}{{ l.id }}'" class="addtocart-btn">
+  Add To Cart
+</button>
+{% endif %}
+{% endblock content %}

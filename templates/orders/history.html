@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- <link rel="stylesheet" type="text/css" href="/static/cart/cart.css" /> -->
+{% block content %}
+<link rel="stylesheet" href="/static/cart/cart.css">
+<div class=cart>
+    <h1> Recent Orders </h1>
+    {% for order in orders %}
+            <div class="item">
+                {% if order.orders.listing.image %}
+                    <div class="image">
+                        <img src="/{{ order.orders.listing.image.url }}" width="80px" height="80px" alt="{{ order.orders.listing.title_text }}">
+                    </div>
+                {% endif %}
+                <div class="item-name">
+                    <label>{{ order.orders.listing.title_text }}</label>
+                    <span>{{ order.orders.listing.desc_text}}</span>
+                </div>
+                <div class="quantity">
+                    <label>{{ order.orders.quantity }}</label>
+                </div>
+                <div class="price">
+                    ${% widthratio order.orders.quantity 1 order.orders.listing.money_price %}
+                </div>
+            </div>
+    {% endfor %}
+</div>
+{% endblock content %}

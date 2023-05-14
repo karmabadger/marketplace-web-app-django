@@ -1,0 +1,40 @@
+<!-- see https://stackoverflow.com/a/40642864 for how to use this -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="stylesheet" type="text/css" href="/static/base.css" />
+    <link rel="stylesheet" type="text/css" href="/static/chat/room.css" />
+    <link rel="stylesheet" type="text/css" href="/static/cart/cart.css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <nav class="nav-bar">
+        <ul class="nav-left nav-bar-list">
+          <li id="nav-home-link"><a href="/listings/">Home</a></li>
+          <li id="nav-deals-link"><a href="/listings/">Deals</a></li>
+          <li id="nav-products-link"><a href="{% url 'listings' %}">Products</a></li>
+          <li id="nav-store-link"><a href="/listings/your_store">Your Store</a></li>
+        </ul>
+        <ul class="nav-right nav-bar-list">
+          <li id="nav-cart-link"><a href="/cart/">Cart</a></li>
+          <li id="nav-account-link"><a href="/accounts/myaccount">Account</a></li>
+          <li id="nav-login-link"><a href="/accounts/login/">Login</a></li>
+          <li id="nav-signup-link"><a href="{% url 'signup' %}">Sign Up</a></li>
+          <li id="nav-login-link"><a href="/accounts/logout/">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="content-block">
+      {% block content %} {% endblock content %}
+    </div>
+  </body>
+</html>

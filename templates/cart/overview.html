@@ -1,0 +1,42 @@
+{% extends 'base.html' %} 
+{% block content %}
+<div class="products">
+    <h1> Your Order </h1>
+    {% for i in items %}
+    {% if not i.ordered %}
+        <div class="item">
+            {% if i.listing.image %}
+                    <div class="image">
+                        <img src="/{{ i.listing.image.url }}" width="80px" height="80px" alt="{{ i.listing.title_text }}">
+                    </div>
+                {% endif %}
+                <div class="item-name">
+                    <span>{{ i.listing.title_text }}</span>
+                    <span>{{ i.listing.desc_text}}</span>
+                </div>
+                <div class="quantity">
+                    <input type="text" name="name" value="{{ i.quantity }}">
+                </div>
+                <div class="price">
+                    ${% widthratio i.quantity 1 i.listing.money_price %}
+                </div>
+            </div>
+    {% endif %}
+    {% endfor %}
+</div>
+<br><br>
+<labe> Total Price: </labe>
+<label> ${{ cart.get_total_price|floatformat:"2" }}</label>
+<div class="information">
+    <h1> Shipping Information </h1>
+    <label> {{ name }} </label>
+        </br>
+    <label> {{ address }} </label>
+        </br>
+    <label> {{ city}}, {{ state }} {{ zip_code }}</label>
+</div>
+</br>
+<a href="/cart/confirmation" class="shipping-btn">Confirm Order</a>
+    </div>
+</div>
+{% endblock content %}

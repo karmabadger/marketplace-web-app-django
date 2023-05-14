@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- <link rel="stylesheet" type="text/css" href="/static/cart/cart.css" /> -->
+{% block content %}
+<style type="text/css" src="/static/cart/cart.css">
+    .price {
+        color: #cf1212;
+    }
+</style>
+<link rel="stylesheet" href="/static/cart/cart.css">
+<div class=cart>
+    <h1> {{ user }}'s Shopping Cart</h1>
+    {% for i in checkoutItems %}
+        {% if not i.ordered %}
+            <div class="item">
+                <a href="/cart/delete/{{ i.id }}" class="del-btn"> <img src="/static/cart/remove.png" width="15px" height="15px"> </a>
+                {% if i.listing.image %}
+                    <div class="image">
+                        <img src="/{{ i.listing.image.url }}" width="80px" height="80px" alt="{{ i.listing.title_text }}">
+                    </div>
+                {% endif %}
+                <div class="item-name">
+                    <label>{{ i.listing.title_text }}</label>
+                    <span class="description">{{ i.listing.desc_text}}</span>
+                </div>
+                <div class="quantity">
+                    <a href="/cart/remove_quantity/{{ i.id }}" class="minus-btn">
+                        <img src="/static/cart/minus.png" width="15px" height="15px">
+                    </a>
+                    <input type="text" name="name" value="{{ i.quantity }}">
+                    <a href="/cart/add_quantity/{{ i.id }}" class="plus-btn">
+                        <img src="/static/cart/plus.png" width="15px" height="15px">
+                    </a>
+                </div>
+                <div class="price">
+                    ${% widthratio i.quantity 1 i.listing.money_price %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<h3> Total Price: </h3>
+<label> ${{ cart.get_total_price|floatformat:"2" }}</label>
+</br>
+<a href="/cart/checkout" class="shipping-btn">Checkout</a>
+{% endblock content %}

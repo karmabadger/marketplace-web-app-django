@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>{{ listing.title_text }}</h1>
+<h3>Posted by {{ listing.owner_user }}</h3>
+
+{% if request.user == listing.owner_user %}
+<div class='listing-controls' align='right'>
+<a href='{% url 'edit' listing.id%}'>Edit</a>
+<a href='{% url 'delete' listing.id%}'>Delete</a>
+</div>
+{% endif %}
+
+{% if listing.image %}
+<img src="../../{{ listing.image.url }}" height="420" />
+{% endif %}
+<p class="item-price">{{ listing.money_price }}$</p>
+<p class="item-inventory">{{ listing.int_inventory}} left in stock</p>
+<p>{{ listing.desc_text }}</p>
+<div><a href="/listings/edit/{{ l.id }}">Edit</a></div><br>
+<div><a href="/listings/delete/{{ l.id }}">Delete</a></div>
+{% endblock content %}

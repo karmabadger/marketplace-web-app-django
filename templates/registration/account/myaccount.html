@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>
+  Your Account
+</h1>
+<p>You are currently signed in as {{ username }}</p><br>
+<a href="/listings/new">Add an item to sell.</a><br> <br>
+<a href="/orders/history/">Your Order History</a><br><br>
+<a href="/chat/{{ username }}">Your Chatbox</a><br><br>
+<a href="/listings/your_store">Your Store</a><br><br>
+<a href="/accounts/logout/">Logout</a><br><br>
+
+
+{% endblock content %}

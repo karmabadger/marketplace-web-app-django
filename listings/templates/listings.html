@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1 id="listings-title">Our Products</h1>
+<div class="listings">
+  {% for l in listings %}
+  <div class="item-div">
+  {% if l.image %} <img class="item-image" src="/{{ l.image.url }}" alt="{{ l.title_text }}" /> {% endif %}
+    
+    <div class="item-text-div">
+      <h2 class="item-title">
+        <a href="{% url 'listings' %}view/{{ l.id }}">{{ l.title_text }}</a>
+      </h2>
+      <p class="item-price">{{ l.money_price }}$</p>
+      <p class="item-inventory">{{ l.int_inventory}} left in stock</p>
+      <p class="item-owner">Offered by: {{ l.owner_user }}</p><br>
+      <a href="/chat/{{ l.owner_user }}">Chat with {{ l.owner_user }}</a><br><br>
+    </div>
+    {% if request.user.is_authenticated %}
+    <button onclick="window.location.href='/listings/add_to_cart{{ request.path}}{{ l.id }}'" class="addtocart-btn">
+      Add To Cart
+    </button>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}
